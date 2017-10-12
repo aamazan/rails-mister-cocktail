@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   root 'cocktails#index'
   resources :cocktails do
+    resources :doses
     member do
        patch 'cocktails/:id/complete', to: 'cocktails#complete', as: :complete
     end

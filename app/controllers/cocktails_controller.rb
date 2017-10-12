@@ -12,14 +12,21 @@ class CocktailsController < ApplicationController
   end
 
   def create
-    # Cocktail.create(params[:id])
-    redirect_to cocktails_path
+    @cocktail = Cocktail.create(cocktail_params)
+    redirect_to cocktail_path(@cocktail)
   end
 
   def destroy
     @cocktail = Task.find(params[:id])
+    @doses = Dose.find(@cocktail)
+    @doses.destroy
     @cocktail.destroy
     redirect_to cocktails_path
+  end
+
+  private
+  def cocktail_params # strong params to prevent exploitation
+    params.require(:cocktail).permit(:name)
   end
 
 end
