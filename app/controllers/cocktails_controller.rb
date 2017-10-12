@@ -18,13 +18,11 @@ class CocktailsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def destroy
     @cocktail = Task.find(params[:id])
-    @doses = Dose.find(@cocktail)
-    @doses.destroy
+    @cocktail.doses.destroy
     @cocktail.destroy
     redirect_to cocktails_path
   end
